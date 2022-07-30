@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:candidate_technical_assessment/addcontact.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -35,66 +36,115 @@ class _MyAppState extends State<Home> {
           appBar: AppBar(
             title: const Text('Vimigo'),
           ),
-          body: Column(
+          body: Stack(
             children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(8.0, screenHeight / 30, 8, 10),
-                child: SizedBox(
-                  width: screenWidth / 1.1,
-                  child: TextField(
-                    onChanged: (value) =>
-                        _sortItembyName(_searchController.text),
-                    cursorColor: Colors.white,
-                    controller: _searchController,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(),
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(
-                        Icons.search,
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(8.0, screenHeight / 30, 8, 10),
+                    child: SizedBox(
+                      width: screenWidth / 1.1,
+                      child: TextField(
+                        onChanged: (value) =>
+                            _sortItembyName(_searchController.text),
+                        cursorColor: Colors.white,
+                        controller: _searchController,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(),
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(
+                            Icons.search,
+                          ),
+                          hintText: "Find Contact",
+                        ),
                       ),
-                      hintText: "Find Contact",
+                    ),
+                  ),
+                  Expanded(
+                    child: GridView.count(
+                      scrollDirection: Axis.vertical,
+                      crossAxisCount: 1,
+                      childAspectRatio: 5,
+                      children: List.generate(
+                          contactdata.length,
+                          (index) => Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  elevation: 2,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10)),
+                                          child: Container(
+                                              height: screenHeight / 5,
+                                              width: screenWidth / 4,
+                                              decoration: const BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/images/vimigo-logo.png'),
+                                                      fit: BoxFit.contain))),
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            contactdata[index]['user'],
+                                            textAlign: TextAlign.start,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            contactdata[index]['phone'],
+                                            textAlign: TextAlign.start,
+                                          ),
+                                          Text(
+                                            DateFormat('dd MMM yyyy hh:mm a')
+                                                .format(DateTime.parse(
+                                                    contactdata[index]
+                                                        ['check_in'])),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )),
+                    ),
+                  )
+                ],
+              ),
+              Positioned(
+                right: screenWidth / 10,
+                bottom: screenHeight / 20,
+                child: ClipOval(
+                  child: Material(
+                    color: Colors.orange, // Button color
+                    child: InkWell(
+                      splashColor: Colors.white, // Splash color
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const AddContact()));
+                      },
+                      child: const SizedBox(
+                          width: 56, height: 56, child: Icon(Icons.add)),
                     ),
                   ),
                 ),
               ),
-              Expanded(
-                child: GridView.count(
-                  scrollDirection: Axis.vertical,
-                  crossAxisCount: 1,
-                  childAspectRatio: 5,
-                  children: List.generate(
-                      contactdata.length,
-                      (index) => Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              elevation: 2,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    contactdata[index]['user'],
-                                    textAlign: TextAlign.start,
-                                  ),
-                                  Text(
-                                    contactdata[index]['phone'],
-                                    textAlign: TextAlign.start,
-                                  ),
-                                  Text(
-                                    DateFormat('dd MMM yyyy hh:mm a').format(
-                                        DateTime.parse(
-                                            contactdata[index]['check_in'])),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )),
-                ),
-              )
             ],
           )),
     );
