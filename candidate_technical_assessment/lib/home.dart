@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:candidate_technical_assessment/addcontact.dart';
+import 'package:candidate_technical_assessment/contact.dart';
+import 'package:candidate_technical_assessment/contactdetails.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -71,52 +73,57 @@ class _MyAppState extends State<Home> {
                           contactdata.length,
                           (index) => Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  elevation: 2,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10)),
-                                          child: Container(
-                                              height: screenHeight / 5,
-                                              width: screenWidth / 4,
-                                              decoration: const BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/vimigo-logo.png'),
-                                                      fit: BoxFit.contain))),
+                                child: InkWell(
+                                  onTap: () => _contactDetails(index),
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    elevation: 2,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(10)),
+                                            child: Container(
+                                                height: screenHeight / 5,
+                                                width: screenWidth / 4,
+                                                decoration: const BoxDecoration(
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            'assets/images/vimigo-logo.png'),
+                                                        fit: BoxFit.contain))),
+                                          ),
                                         ),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text(
-                                            contactdata[index]['user'],
-                                            textAlign: TextAlign.start,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            contactdata[index]['phone'],
-                                            textAlign: TextAlign.start,
-                                          ),
-                                          Text(
-                                            DateFormat('dd MMM yyyy hh:mm a')
-                                                .format(DateTime.parse(
-                                                    contactdata[index]
-                                                        ['check_in'])),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              contactdata[index]['user'],
+                                              textAlign: TextAlign.start,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              contactdata[index]['phone'],
+                                              textAlign: TextAlign.start,
+                                            ),
+                                            Text(
+                                              DateFormat('dd MMM yyyy hh:mm a')
+                                                  .format(DateTime.parse(
+                                                      contactdata[index]
+                                                          ['check_in'])),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               )),
@@ -196,5 +203,19 @@ class _MyAppState extends State<Home> {
       Toast.show("Error", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
+  }
+
+  _contactDetails(int index) {
+    User _userData = User(
+        user: contactdata[index]['user'],
+        phone: contactdata[index]['phone'],
+        checkin: contactdata[index]['check_in']);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => ContactDetails(
+                  user: _userData,
+                )));
   }
 }

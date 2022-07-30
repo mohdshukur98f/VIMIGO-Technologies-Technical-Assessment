@@ -16,7 +16,6 @@ class _AddContactState extends State<AddContact> {
   String server = "https://seriouslaa.com/vimigoTech/php";
   late double screenHeight, screenWidth;
   final _formKey = GlobalKey<FormState>();
-  late File _image;
 
   TextEditingController userEditingController = TextEditingController();
   TextEditingController phoneEditingController = TextEditingController();
@@ -138,7 +137,7 @@ class _AddContactState extends State<AddContact> {
       }).then((res) {
         Navigator.push(context,
             MaterialPageRoute(builder: (BuildContext context) => const Home()));
-        Toast.show("Registration success", context,
+        Toast.show("New Contact Added", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       }).catchError((err) {
         print(err);
