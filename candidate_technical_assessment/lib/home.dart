@@ -73,7 +73,6 @@ class _MyAppState extends State<Home> {
         setState(() {
           var extractdata = json.decode(res.body);
           contactdata = extractdata["contact"];
-          // cartquantity = widget.user.quantity;
         });
       }
     }).catchError((err) {});
