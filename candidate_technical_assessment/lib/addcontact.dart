@@ -136,7 +136,7 @@ class _AddContactState extends State<AddContact> {
         "phone": phone,
       }).then((res) {
         Navigator.push(context,
-            MaterialPageRoute(builder: (BuildContext context) => const Home()));
+            MaterialPageRoute(builder: (BuildContext context) => Home()));
         Toast.show("New Contact Added", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       }).catchError((err) {

@@ -34,6 +34,8 @@ dependencies:
   toast: ^0.1.5
   image_cropper: ^2.0.3
   image_picker:
+  introduction_screen: ^3.0.2
+  flame: ^1.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -66,7 +68,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-  #   - images/a_dot_ham.jpeg
+    - assets/images/animation.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

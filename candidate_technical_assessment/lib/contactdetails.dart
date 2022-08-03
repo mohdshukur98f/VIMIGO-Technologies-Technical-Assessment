@@ -17,11 +17,16 @@ class _ContactDetailsState extends State<ContactDetails> {
       title: 'Material App',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Contact Details'),
+          title: const Text('Contact Details'),
         ),
-        body: Center(
-          child: Text(widget.user.user),
-        ),
+        body: SafeArea(
+            child: Column(
+          children: [
+            Text(widget.user.user),
+            Text(widget.user.phone),
+            Text(widget.user.checkin),
+          ],
+        )),
       ),
     );
   }

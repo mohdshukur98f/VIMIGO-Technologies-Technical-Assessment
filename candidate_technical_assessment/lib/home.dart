@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:candidate_technical_assessment/addcontact.dart';
 import 'package:candidate_technical_assessment/contact.dart';
 import 'package:candidate_technical_assessment/contactdetails.dart';
+import 'package:candidate_technical_assessment/SpriteAnimation.dart';
+import 'package:flame/game.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -35,8 +37,19 @@ class _MyAppState extends State<Home> {
     screenWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            title: const Text('Vimigo'),
+            automaticallyImplyLeading: false,
+            title: Center(
+              child: Container(
+                  height: screenHeight / 16,
+                  width: screenWidth / 2,
+                  // ignore: prefer_const_constructors
+                  decoration: BoxDecoration(
+                      image: const DecorationImage(
+                          image: AssetImage('assets/images/vimigo_tech.png'),
+                          fit: BoxFit.fitHeight))),
+            ),
           ),
           body: Stack(
             children: [
@@ -68,7 +81,7 @@ class _MyAppState extends State<Home> {
                     child: GridView.count(
                       scrollDirection: Axis.vertical,
                       crossAxisCount: 1,
-                      childAspectRatio: 5,
+                      childAspectRatio: 4,
                       children: List.generate(
                           contactdata.length,
                           (index) => Padding(
@@ -92,7 +105,7 @@ class _MyAppState extends State<Home> {
                                                     Radius.circular(10)),
                                             child: Container(
                                                 height: screenHeight / 5,
-                                                width: screenWidth / 4,
+                                                width: screenWidth / 5,
                                                 decoration: const BoxDecoration(
                                                     image: DecorationImage(
                                                         image: AssetImage(
@@ -103,6 +116,8 @@ class _MyAppState extends State<Home> {
                                         Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               contactdata[index]['user'],
@@ -110,15 +125,30 @@ class _MyAppState extends State<Home> {
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            Text(
-                                              contactdata[index]['phone'],
-                                              textAlign: TextAlign.start,
-                                            ),
-                                            Text(
-                                              DateFormat('dd MMM yyyy hh:mm a')
-                                                  .format(DateTime.parse(
+                                            Row(
+                                              children: [
+                                                Icon(Icons.phone),
+                                                Text(
+                                                  " " +
                                                       contactdata[index]
-                                                          ['check_in'])),
+                                                          ['phone'],
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.calendar_today),
+                                                Text(
+                                                  " " +
+                                                      DateFormat(
+                                                              'dd MMM yyyy hh:mm a')
+                                                          .format(DateTime.parse(
+                                                              contactdata[index]
+                                                                  [
+                                                                  'check_in'])),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -133,10 +163,10 @@ class _MyAppState extends State<Home> {
               ),
               Positioned(
                 right: screenWidth / 10,
-                bottom: screenHeight / 20,
+                bottom: screenHeight / 7,
                 child: ClipOval(
                   child: Material(
-                    color: Colors.orange, // Button color
+                    color: Colors.orangeAccent, // Button color
                     child: InkWell(
                       splashColor: Colors.white, // Splash color
                       onTap: () {
@@ -152,6 +182,7 @@ class _MyAppState extends State<Home> {
                   ),
                 ),
               ),
+              SizedBox(height: 1, width: 1, child: GameWidget(game: MyGame())),
             ],
           )),
     );
