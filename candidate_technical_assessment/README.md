@@ -1,16 +1,21 @@
 # candidate_technical_assessment
 
-A new Flutter project.
+## Plugins that uses to build this app.
+ dependencies:
+ 
+  flutter:
+  
+    sdk: flutter
+    
+  http: ^0.13.4
+  
+  toast: ^0.1.5
+  
+  introduction_screen: ^3.0.2
+  
+  flame: ^1.2.0
+  
+  cupertino_icons: ^1.0.2
+  
+  intl: ^0.17.0
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
