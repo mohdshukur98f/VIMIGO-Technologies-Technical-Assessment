@@ -35,157 +35,151 @@ class _MyAppState extends State<Home> {
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Center(
-              child: Container(
-                  height: screenHeight / 16,
-                  width: screenWidth / 2,
-                  // ignore: prefer_const_constructors
-                  decoration: BoxDecoration(
-                      image: const DecorationImage(
-                          image: AssetImage('assets/images/vimigo_tech.png'),
-                          fit: BoxFit.fitHeight))),
-            ),
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Center(
+            child: Container(
+                height: screenHeight / 16,
+                width: screenWidth / 2,
+                // ignore: prefer_const_constructors
+                decoration: BoxDecoration(
+                    image: const DecorationImage(
+                        image: AssetImage('assets/images/vimigo_tech.png'),
+                        fit: BoxFit.fitHeight))),
           ),
-          body: Stack(
-            children: [
-              Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(8.0, screenHeight / 30, 8, 10),
-                    child: SizedBox(
-                      width: screenWidth / 1.1,
-                      child: TextField(
-                        onChanged: (value) =>
-                            _sortItembyName(_searchController.text),
-                        cursorColor: Colors.white,
-                        controller: _searchController,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(),
-                          border: OutlineInputBorder(),
-                          prefixIcon: Icon(
-                            Icons.search,
-                          ),
-                          hintText: "Find Contact",
+        ),
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(8.0, screenHeight / 30, 8, 10),
+                  child: SizedBox(
+                    width: screenWidth / 1.1,
+                    child: TextField(
+                      onChanged: (value) =>
+                          _sortItembyName(_searchController.text),
+                      cursorColor: Colors.white,
+                      controller: _searchController,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        enabledBorder: OutlineInputBorder(),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(
+                          Icons.search,
                         ),
+                        hintText: "Find Contact",
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: GridView.count(
-                      scrollDirection: Axis.vertical,
-                      crossAxisCount: 1,
-                      childAspectRatio: 4,
-                      children: List.generate(
-                          contactdata.length,
-                          (index) => Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                child: InkWell(
-                                  onTap: () => _contactDetails(index),
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    elevation: 2,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(10)),
-                                            child: Container(
-                                                height: screenHeight / 5,
-                                                width: screenWidth / 5,
-                                                decoration: const BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'assets/images/vimigo-logo.png'),
-                                                        fit: BoxFit.contain))),
+                ),
+                Expanded(
+                  child: GridView.count(
+                    scrollDirection: Axis.vertical,
+                    crossAxisCount: 1,
+                    childAspectRatio: 4,
+                    children: List.generate(
+                        contactdata.length,
+                        (index) => Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                              child: InkWell(
+                                onTap: () => _contactDetails(index),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  elevation: 2,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10)),
+                                          child: Container(
+                                              height: screenHeight / 5,
+                                              width: screenWidth / 5,
+                                              decoration: const BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/images/vimigo-logo.png'),
+                                                      fit: BoxFit.contain))),
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            contactdata[index]['user'],
+                                            textAlign: TextAlign.start,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              contactdata[index]['user'],
-                                              textAlign: TextAlign.start,
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.phone),
-                                                Text(
-                                                  " " +
-                                                      contactdata[index]
-                                                          ['phone'],
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.calendar_today),
-                                                Text(
-                                                  " " +
-                                                      DateFormat(
-                                                              'dd MMM yyyy hh:mm a')
-                                                          .format(DateTime.parse(
-                                                              contactdata[index]
-                                                                  [
-                                                                  'check_in'])),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.phone),
+                                              Text(
+                                                " " +
+                                                    contactdata[index]['phone'],
+                                                textAlign: TextAlign.start,
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.calendar_today),
+                                              Text(
+                                                " " +
+                                                    DateFormat(
+                                                            'dd MMM yyyy hh:mm a')
+                                                        .format(DateTime.parse(
+                                                            contactdata[index]
+                                                                ['check_in'])),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              )),
-                    ),
-                  )
-                ],
-              ),
-              Positioned(
-                right: screenWidth / 10,
-                bottom: screenHeight / 7,
-                child: ClipOval(
-                  child: Material(
-                    color: Colors.orangeAccent, // Button color
-                    child: InkWell(
-                      splashColor: Colors.white, // Splash color
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const AddContact()));
-                      },
-                      child: const SizedBox(
-                          width: 56, height: 56, child: Icon(Icons.add)),
-                    ),
+                              ),
+                            )),
+                  ),
+                )
+              ],
+            ),
+            Positioned(
+              right: screenWidth / 10,
+              bottom: screenHeight / 7,
+              child: ClipOval(
+                child: Material(
+                  color: Colors.orangeAccent, // Button color
+                  child: InkWell(
+                    splashColor: Colors.white, // Splash color
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const AddContact()));
+                    },
+                    child: const SizedBox(
+                        width: 56, height: 56, child: Icon(Icons.add)),
                   ),
                 ),
               ),
-              SizedBox(height: 1, width: 1, child: GameWidget(game: MyGame())),
-            ],
-          )),
-    );
+            ),
+            SizedBox(height: 1, width: 1, child: GameWidget(game: MyGame())),
+          ],
+        ));
   }
 
   void _loadcontact() async {

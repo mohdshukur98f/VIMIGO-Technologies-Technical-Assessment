@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     // ignore: prefer_const_constructors
     return MaterialApp(
       title: 'Vamigo Technologies',
-      // theme: ThemeData(primarySwatch: Colors.blueGrey),
+      theme: ThemeData(primarySwatch: Colors.orange),
       home: const OnBoarding(),
     );
   }

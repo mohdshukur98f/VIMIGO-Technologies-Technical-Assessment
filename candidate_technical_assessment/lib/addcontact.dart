@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:candidate_technical_assessment/home.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class _AddContactState extends State<AddContact> {
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Add Contact'),
+          title: const Text('Add New Contact'),
         ),
         body: Form(
           key: _formKey,
@@ -42,39 +41,37 @@ class _AddContactState extends State<AddContact> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Text(
-                      "Contact Name",
-                    ),
+                    const Text("Contact Name",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: FractionallySizedBox(
-                        alignment: Alignment.centerLeft,
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter something!';
-                            }
-                            return null;
-                          },
-                          decoration: const InputDecoration(
-                            hintText: "Enter contact name here",
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.orangeAccent, width: 2)),
-                            border: OutlineInputBorder(),
-                          ),
-                          textInputAction: TextInputAction.newline,
-                          keyboardType: TextInputType.multiline,
-                          minLines: null,
-                          maxLines: null,
-                          controller: userEditingController,
-                        ),
-                      ),
+                          alignment: Alignment.centerLeft,
+                          child: TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter something!';
+                                }
+                                return null;
+                              },
+                              decoration: const InputDecoration(
+                                hintText: "Enter contact name here",
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.orangeAccent, width: 2)),
+                                border: OutlineInputBorder(),
+                              ),
+                              textInputAction: TextInputAction.newline,
+                              keyboardType: TextInputType.multiline,
+                              minLines: null,
+                              maxLines: null,
+                              controller: userEditingController)),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
-                      "Phone Number",
-                    ),
+                    const Text("Phone Number",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: FractionallySizedBox(
