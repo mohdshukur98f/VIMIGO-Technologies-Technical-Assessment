@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     // ignore: prefer_const_constructors
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Vamigo Technologies',
+      title: 'Vamigo Technologies Sdn. Bhd.',
       theme: ThemeData(primarySwatch: Colors.orange),
       home: const OnBoarding(),
     );

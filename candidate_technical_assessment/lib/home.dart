@@ -76,87 +76,102 @@ class _MyAppState extends State<Home> {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: GridView.count(
-                    scrollDirection: Axis.vertical,
-                    crossAxisCount: 1,
-                    childAspectRatio: 4,
-                    children: List.generate(
-                        contactdata.length,
-                        (index) => Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                              child: InkWell(
-                                onTap: () => _contactDetails(index),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  elevation: 2,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10)),
-                                          child: Container(
-                                              height: screenHeight / 5,
-                                              width: screenWidth / 5,
-                                              decoration: const BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/vimigo-logo.png'),
-                                                      fit: BoxFit.contain))),
+                contactdata == []
+                    ? const Center(
+                        child: Text("No Data"),
+                      )
+                    : Expanded(
+                        child: GridView.count(
+                          scrollDirection: Axis.vertical,
+                          crossAxisCount: 1,
+                          childAspectRatio: 4,
+                          children: List.generate(
+                              contactdata.length,
+                              (index) => Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                    child: InkWell(
+                                      onTap: () => _contactDetails(index),
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        elevation: 2,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(10)),
+                                                child: Container(
+                                                    height: screenHeight / 5,
+                                                    width: screenWidth / 5,
+                                                    decoration: const BoxDecoration(
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                'assets/images/vimigo-logo.png'),
+                                                            fit: BoxFit
+                                                                .contain))),
+                                              ),
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  contactdata[index]['user'],
+                                                  textAlign: TextAlign.start,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 18),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    const Icon(Icons.phone),
+                                                    Text(
+                                                      " " +
+                                                          contactdata[index]
+                                                              ['phone'],
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: const TextStyle(
+                                                          fontSize: 15),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    const Icon(
+                                                        Icons.calendar_today),
+                                                    Text(
+                                                      " " +
+                                                          DateFormat(
+                                                                  'dd MMM yyyy hh:mm a')
+                                                              .format(DateTime.parse(
+                                                                  contactdata[
+                                                                          index]
+                                                                      [
+                                                                      'check_in'])),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            contactdata[index]['user'],
-                                            textAlign: TextAlign.start,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18),
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Icon(Icons.phone),
-                                              Text(
-                                                " " +
-                                                    contactdata[index]['phone'],
-                                                textAlign: TextAlign.start,
-                                                style: const TextStyle(
-                                                    fontSize: 15),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              const Icon(Icons.calendar_today),
-                                              Text(
-                                                " " +
-                                                    DateFormat(
-                                                            'dd MMM yyyy hh:mm a')
-                                                        .format(DateTime.parse(
-                                                            contactdata[index]
-                                                                ['check_in'])),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            )),
-                  ),
-                )
+                                    ),
+                                  )),
+                        ),
+                      )
               ],
             ),
             Positioned(
@@ -180,7 +195,11 @@ class _MyAppState extends State<Home> {
                 ),
               ),
             ),
-            SizedBox(height: 1, width: 1, child: GameWidget(game: MyGame())),
+            Positioned(
+                right: screenWidth / 4,
+                top: screenHeight / 1.33,
+                child: SizedBox(
+                    height: 1, width: 1, child: GameWidget(game: MyGame()))),
           ],
         ));
   }

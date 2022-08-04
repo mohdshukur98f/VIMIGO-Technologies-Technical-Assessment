@@ -30,7 +30,7 @@ class _OnBoardingState extends State<OnBoarding> {
           decoration: getPageDecoration(),
         ),
         PageViewModel(
-          title: 'Home Page & Sprite Sheet',
+          title: 'Home & Sprite Sheet',
           body:
               'This page was displaying the sortable contact list that provided in the Assessment. The application will display an animation using sprite sheet.',
           image: Image.asset(
@@ -41,7 +41,7 @@ class _OnBoardingState extends State<OnBoarding> {
           decoration: getPageDecoration(),
         ),
         PageViewModel(
-          title: 'Contact Details!',
+          title: 'Contact Details',
           body:
               'User able to to click the particular contact to see the details of the contact.',
           image: Image.asset(
@@ -52,15 +52,16 @@ class _OnBoardingState extends State<OnBoarding> {
           decoration: getPageDecoration(),
         ),
         PageViewModel(
-          title: 'Add New Contact!',
-          body: 'User able to add new contact information into the Application',
+          title: 'Add New Contact',
+          body:
+              'User able to add new contact information into the Application.',
           image: Image.asset(
             'assets/images/p3.png',
             width: screenWidth,
             height: screenHeight,
           ),
           decoration: getPageDecoration(),
-        ),
+        )
       ],
       done:
           const Text('Continue', style: TextStyle(fontWeight: FontWeight.w600)),
@@ -71,13 +72,12 @@ class _OnBoardingState extends State<OnBoarding> {
       next: const Icon(Icons.arrow_forward),
       dotsDecorator: getDotDecoration(),
       onChange: (index) => ('Page $index selected'),
-      // globalBackgroundColor: Theme.of(context).primaryColor,
       nextFlex: 0,
     ));
   }
 
   void goToHome(context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => Home()),
+        MaterialPageRoute(builder: (_) => const Home()),
       );
 
   DotsDecorator getDotDecoration() => DotsDecorator(
