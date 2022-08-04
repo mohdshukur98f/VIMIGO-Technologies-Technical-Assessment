@@ -2,43 +2,64 @@ import 'package:candidate_technical_assessment/home.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-class OnBoarding extends StatelessWidget {
+class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
 
   @override
+  State<OnBoarding> createState() => _OnBoardingState();
+}
+
+class _OnBoardingState extends State<OnBoarding> {
+  late double screenHeight, screenWidth;
+
+  @override
   Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
     return SafeArea(
         child: IntroductionScreen(
       pages: [
         PageViewModel(
-          title: 'Page 1',
-          body: 'Page 1',
-          // image: ('assets/.png'),
+          title: 'Welcome to Candidate Technical Assessment!',
+          body: 'The man who never reads lives only one.',
+          image: Image.asset(
+            'assets/images/vimigo-logo.png',
+            width: screenWidth,
+            height: screenHeight,
+          ),
           decoration: getPageDecoration(),
         ),
         PageViewModel(
-          title: 'Page 1',
-          body: 'Page 1',
-          // image: buildImage('assets/.png'),
-          // decoration: getPageDecoration(),
+          title: 'Home Page & Sprite Sheet',
+          body:
+              'This page was displaying the sortable contact list that provided in the Assessment. The application will display an animation using sprite sheet.',
+          image: Image.asset(
+            'assets/images/p1.png',
+            width: screenWidth,
+            height: screenHeight,
+          ),
+          decoration: getPageDecoration(),
         ),
         PageViewModel(
-          title: 'Page 1',
-          body: 'Page 1',
-          // image: buildImage('assets/.png'),
-          // decoration: getPageDecoration(),
+          title: 'Contact Details!',
+          body:
+              'User able to to click the particular contact to see the details of the contact.',
+          image: Image.asset(
+            'assets/images/p2.png',
+            width: screenWidth,
+            height: screenHeight,
+          ),
+          decoration: getPageDecoration(),
         ),
         PageViewModel(
-          title: 'Page 1',
-          body: 'Page 1',
-          // image: buildImage(' .png'),
-          // decoration: getPageDecoration(),
-        ),
-        PageViewModel(
-          title: 'Page 1',
-          body: 'Page 1',
-          // image: buildImage('.png'),
-          // decoration: getPageDecoration(),
+          title: 'Add New Contact!',
+          body: 'User able to add new contact information into the Application',
+          image: Image.asset(
+            'assets/images/p3.png',
+            width: screenWidth,
+            height: screenHeight,
+          ),
+          decoration: getPageDecoration(),
         ),
       ],
       done:
@@ -56,7 +77,7 @@ class OnBoarding extends StatelessWidget {
   }
 
   void goToHome(context) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const Home()),
+        MaterialPageRoute(builder: (_) => Home()),
       );
 
   DotsDecorator getDotDecoration() => DotsDecorator(
@@ -69,6 +90,7 @@ class OnBoarding extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
         ),
       );
+
   PageDecoration getPageDecoration() => const PageDecoration(
         titleTextStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         bodyTextStyle: TextStyle(fontSize: 20),

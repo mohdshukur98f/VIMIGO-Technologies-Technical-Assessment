@@ -16,8 +16,8 @@ class MyGame extends FlameGame {
 
     vimigoAnimation =
         SpriteAnimationComponent.fromFrameData(spriteSheet, spriteData)
-          ..x = 303
-          ..y = 501
+          ..x = 260
+          ..y = 600
           ..size = spritesize;
 
     add(vimigoAnimation);
