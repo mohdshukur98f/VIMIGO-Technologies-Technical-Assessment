@@ -120,21 +120,24 @@ class _MyAppState extends State<Home> {
                                             contactdata[index]['user'],
                                             textAlign: TextAlign.start,
                                             style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18),
                                           ),
                                           Row(
                                             children: [
-                                              Icon(Icons.phone),
+                                              const Icon(Icons.phone),
                                               Text(
                                                 " " +
                                                     contactdata[index]['phone'],
                                                 textAlign: TextAlign.start,
+                                                style: const TextStyle(
+                                                    fontSize: 15),
                                               ),
                                             ],
                                           ),
                                           Row(
                                             children: [
-                                              Icon(Icons.calendar_today),
+                                              const Icon(Icons.calendar_today),
                                               Text(
                                                 " " +
                                                     DateFormat(
@@ -161,9 +164,9 @@ class _MyAppState extends State<Home> {
               bottom: screenHeight / 7,
               child: ClipOval(
                 child: Material(
-                  color: Colors.orangeAccent, // Button color
+                  color: Colors.orangeAccent,
                   child: InkWell(
-                    splashColor: Colors.white, // Splash color
+                    splashColor: Colors.white,
                     onTap: () {
                       Navigator.push(
                           context,

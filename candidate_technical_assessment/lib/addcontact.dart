@@ -1,7 +1,7 @@
 import 'package:candidate_technical_assessment/home.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
 
 class AddContact extends StatefulWidget {
@@ -107,10 +107,9 @@ class _AddContactState extends State<AddContact> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
-                        child: const Text('Add Contact',
-                            style: TextStyle(
-                              color: Colors.black,
-                            )),
+                        child: const Text('Add New Contact',
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 18)),
                         color: Colors.orange[300],
                         onPressed: _register,
                       ),
@@ -133,11 +132,13 @@ class _AddContactState extends State<AddContact> {
         "phone": phone,
       }).then((res) {
         Navigator.push(context,
-            MaterialPageRoute(builder: (BuildContext context) => Home()));
+            MaterialPageRoute(builder: (BuildContext context) => const Home()));
         Toast.show("New Contact Added", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       }).catchError((err) {
-        print(err);
+        if (kDebugMode) {
+          print(err);
+        }
       });
     }
   }

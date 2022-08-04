@@ -1,6 +1,4 @@
-import 'package:candidate_technical_assessment/home.dart';
 import 'package:candidate_technical_assessment/onboarding.dart';
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 void main() async => runApp(
@@ -14,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Vamigo Technologies',
       theme: ThemeData(primarySwatch: Colors.orange),
       home: const OnBoarding(),

@@ -37,7 +37,7 @@ class _ContactDetailsState extends State<ContactDetails> {
                   decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/images/vimigo-logo.png'),
-                          fit: BoxFit.fitHeight))),
+                          fit: BoxFit.contain))),
             ),
             Form(
               key: _formKey,
