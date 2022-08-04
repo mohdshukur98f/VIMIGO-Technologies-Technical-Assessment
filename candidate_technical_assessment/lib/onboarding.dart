@@ -21,7 +21,7 @@ class _OnBoardingState extends State<OnBoarding> {
       pages: [
         PageViewModel(
           title: 'Welcome to Candidate Technical Assessment!',
-          body: 'The man who never reads lives only one.',
+          body: 'This application was developed based on the storyline given.',
           image: Image.asset(
             'assets/images/vimigo-logo.png',
             width: screenWidth,
